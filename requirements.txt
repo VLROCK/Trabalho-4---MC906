@@ -1,0 +1,48 @@
+# ==========================================
+# CORE & DEEP LEARNING
+# ==========================================
+torch>=2.0.0
+torchvision>=0.15.0
+# timm é essencial: contém implementações SOTA de ConvNeXt, EfficientNet, etc.
+timm>=0.9.0 
+
+# ==========================================
+# CLASSICAL ML & CABEÇOTES (HEADS)
+# ==========================================
+scikit-learn>=1.3.0  # Para SVM, Naive Bayes, Regressão Logística
+xgboost>=2.0.0       # Para o XGBoost
+
+# ==========================================
+# TRATAMENTO DE DADOS & RUÍDOS
+# ==========================================
+pandas>=2.0.0
+numpy>=1.24.0
+# cleanlab é a principal biblioteca para Confident Learning (encontra labels erradas)
+cleanlab>=2.5.0      
+
+# ==========================================
+# PROCESSAMENTO DE IMAGEM & DATA AUGMENTATION
+# ==========================================
+opencv-python>=4.8.0 # Essencial para leitura rápida e conversões de cor
+Pillow>=10.0.0
+# albumentations é o estado da arte para augmentation em imagens (muito superior ao torchvision)
+albumentations>=1.3.1 
+scipy>=1.11.0        # Útil para transformadas de Fourier (domínio de frequência)
+PyWavelets>=1.4.1    # Para extração de features em frequência (Wavelet transforms)
+
+# ==========================================
+# INTERPRETABILIDADE
+# ==========================================
+# pytorch-grad-cam facilita a geração de mapas de calor para ResNet/ConvNeXt
+grad-cam>=1.4.8      
+captum>=0.6.0        # Biblioteca oficial do PyTorch para interpretabilidade (opcional, mas robusta)
+
+# ==========================================
+# PLOTAGEM & UTILIDADES
+# ==========================================
+matplotlib>=3.7.0
+seaborn>=0.12.0      # Ótimo para plotar a matriz de confusão e distribuição de classes
+tqdm>=4.65.0         # Barras de progresso no loop de treino
+wandb>=0.15.0        # Weights & Biases (altamente recomendado para monitorar treino em grupo)
+kagglehub>=0.16.0      # Para baixar datasets do Kaggle diretamente (opcional, mas útil)
+kaggle>=1.5.16         # Para baixar datasets do Kaggle diretamente (opcional, mas útil)
