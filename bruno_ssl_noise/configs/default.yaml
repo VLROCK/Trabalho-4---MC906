@@ -1,0 +1,36 @@
+# Configuração padrão dos experimentos.
+# Tudo aqui pode ser sobrescrito por argumentos de linha de comando.
+
+seed: 42
+num_classes: 5
+image_size: 224
+val_size: 0.15          # fração usada como validação (split estratificado)
+class_names: ["CBB", "CBSD", "CGM", "CMD", "Healthy"]
+
+# ---- Self-supervised (Barlow Twins) ----
+ssl:
+  backbone: resnet50    # backbone usado no pré-treino
+  epochs: 100
+  batch_size: 256
+  lr: 0.001
+  weight_decay: 0.000001
+  proj_dim: 2048        # dimensão da projection head
+  lambda_bt: 0.005      # peso do termo off-diagonal (redundância)
+
+# ---- Fine-tuning supervisionado ----
+train:
+  epochs: 20
+  batch_size: 64
+  lr: 0.0003
+  weight_decay: 0.0001
+  loss: label_smoothing # ce | label_smoothing | weighted_ce | focal
+  label_smoothing: 0.1
+  augmentation: medium  # none | light | medium | strong
+  num_workers: 4
+  ckpt_every: 5         # salva checkpoint a cada N épocas (para SLURM)
+  early_stop_patience: 6
+
+# ---- Detecção de ruído ----
+noise:
+  top_k: 200            # quantas amostras suspeitas listar por método
+  knn_k: 20             # vizinhos no espaço de embeddings
