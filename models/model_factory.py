@@ -1,14 +1,15 @@
-"""Factory de modelos para facilitar experimentação.
+import torch.nn as nn
+from torchvision import models
 
-Usa timm para ResNet/EfficientNet/ConvNeXt/Swin/ViT e um híbrido próprio
-CNN+Transformer.
-"""
+try:
+    import timm
+except ImportError:
+    timm = None
 
-from __future__ import annotations
-
-import timm
-
-from models.cnn_transformer import ResNetTransformerClassifier
+try:
+    from models.cnn_transformer import CNNTransformerClassifier
+except ImportError:
+    CNNTransformerClassifier = None
 
 
 def build_model(
@@ -18,46 +19,128 @@ def build_model(
     image_size: int = 224,
     drop_rate: float = 0.0,
 ):
-    name = model_name.lower()
+    """
+    Factory de modelos para o train_experiments.py.
 
-    aliases = {
-        "resnet50": "resnet50",
-        "resnet18": "resnet18",
-        "efficientnet_b0": "efficientnet_b0",
-        "efficientnet_b3": "efficientnet_b3",
-        "convnext_tiny": "convnext_tiny",
-        "swin_tiny": "swin_tiny_patch4_window7_224",
-        "vit_small": "vit_small_patch16_224",
-    }
+    Usa torchvision para modelos principais, evitando Hugging Face/timm
+    quando o cluster não tem internet dentro do salloc.
+    """
 
-    if name == "cnn_transformer_resnet18":
-        return ResNetTransformerClassifier(
+    model_name = model_name.lower()
+
+    # =========================
+    # ResNet50 - torchvision
+    # =========================
+    if model_name == "resnet50":
+        if pretrained:
+            weights = models.ResNet50_Weights.IMAGENET1K_V1
+        else:
+            weights = None
+
+        model = models.resnet50(weights=weights)
+        in_features = model.fc.in_features
+        model.fc = nn.Linear(in_features, num_classes)
+        return model
+
+    # =========================
+    # ResNet18 - torchvision
+    # =========================
+    if model_name == "resnet18":
+        if pretrained:
+            weights = models.ResNet18_Weights.IMAGENET1K_V1
+        else:
+            weights = None
+
+        model = models.resnet18(weights=weights)
+        in_features = model.fc.in_features
+        model.fc = nn.Linear(in_features, num_classes)
+        return model
+
+    # =========================
+    # EfficientNet-B0 - torchvision
+    # =========================
+    if model_name == "efficientnet_b0":
+        if pretrained:
+            weights = models.EfficientNet_B0_Weights.IMAGENET1K_V1
+        else:
+            weights = None
+
+        model = models.efficientnet_b0(weights=weights)
+        in_features = model.classifier[-1].in_features
+        model.classifier[-1] = nn.Linear(in_features, num_classes)
+        return model
+
+    # =========================
+    # EfficientNet-B3 - torchvision
+    # =========================
+    if model_name == "efficientnet_b3":
+        if pretrained:
+            weights = models.EfficientNet_B3_Weights.IMAGENET1K_V1
+        else:
+            weights = None
+
+        model = models.efficientnet_b3(weights=weights)
+        in_features = model.classifier[-1].in_features
+        model.classifier[-1] = nn.Linear(in_features, num_classes)
+        return model
+
+    # =========================
+    # ConvNeXt-Tiny - torchvision
+    # =========================
+    if model_name == "convnext_tiny":
+        if pretrained:
+            weights = models.ConvNeXt_Tiny_Weights.IMAGENET1K_V1
+        else:
+            weights = None
+
+        model = models.convnext_tiny(weights=weights)
+        in_features = model.classifier[-1].in_features
+        model.classifier[-1] = nn.Linear(in_features, num_classes)
+        return model
+
+    # =========================
+    # CNN + Transformer custom
+    # =========================
+    if model_name == "cnn_transformer_resnet18":
+        if CNNTransformerClassifier is None:
+            raise ImportError(
+                "CNNTransformerClassifier não encontrado em models/cnn_transformer.py"
+            )
+
+        return CNNTransformerClassifier(
             backbone_name="resnet18",
             num_classes=num_classes,
             pretrained=pretrained,
-            image_size=image_size,
-            embed_dim=384,
-            num_heads=6,
-            depth=2,
-            dropout=drop_rate,
         )
 
-    if name == "cnn_transformer_resnet50":
-        return ResNetTransformerClassifier(
+    if model_name == "cnn_transformer_resnet50":
+        if CNNTransformerClassifier is None:
+            raise ImportError(
+                "CNNTransformerClassifier não encontrado em models/cnn_transformer.py"
+            )
+
+        return CNNTransformerClassifier(
             backbone_name="resnet50",
             num_classes=num_classes,
             pretrained=pretrained,
-            image_size=image_size,
-            embed_dim=512,
-            num_heads=8,
-            depth=2,
-            dropout=drop_rate,
         )
 
-    timm_name = aliases.get(name, model_name)
+    # =========================
+    # Fallback para timm
+    # =========================
+    if timm is None:
+        raise ImportError(
+            f"Modelo '{model_name}' não está implementado em torchvision "
+            "e timm não está instalado."
+        )
+
+    print(
+        f"Aviso: usando timm para o modelo '{model_name}'. "
+        "Se pretrained=True, isso pode tentar baixar pesos da internet."
+    )
 
     return timm.create_model(
-        timm_name,
+        model_name,
         pretrained=pretrained,
         num_classes=num_classes,
         drop_rate=drop_rate,
