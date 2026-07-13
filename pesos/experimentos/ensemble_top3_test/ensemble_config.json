@@ -1,0 +1,53 @@
+{
+  "split": "test",
+  "checkpoints": [
+    "pesos/experimentos/efficientnet_b3_cutmix_label_smoothing_img300_segmentation/best_model.pth",
+    "pesos/experimentos/resnet50_cutmix_label_smoothing_reg/best_model.pth",
+    "pesos/experimentos/convnext_tiny_label_smoothing_reg/best_model.pth"
+  ],
+  "weights": [
+    0.45,
+    0.25,
+    0.3
+  ],
+  "tta_modes": [
+    "none",
+    "none",
+    "none"
+  ],
+  "model_summaries": [
+    {
+      "checkpoint": "pesos/experimentos/efficientnet_b3_cutmix_label_smoothing_img300_segmentation/best_model.pth",
+      "weight": 0.45,
+      "tta": false,
+      "model_name": "efficientnet_b3",
+      "image_size": 300,
+      "segmentation": true,
+      "best_acc": 0.8828660436137071,
+      "best_macro_f1": 0.7857004343806181
+    },
+    {
+      "checkpoint": "pesos/experimentos/resnet50_cutmix_label_smoothing_reg/best_model.pth",
+      "weight": 0.25,
+      "tta": false,
+      "model_name": "resnet50",
+      "image_size": 224,
+      "segmentation": false,
+      "best_acc": 0.8728971962616823,
+      "best_macro_f1": 0.7732522768338701
+    },
+    {
+      "checkpoint": "pesos/experimentos/convnext_tiny_label_smoothing_reg/best_model.pth",
+      "weight": 0.3,
+      "tta": false,
+      "model_name": "convnext_tiny",
+      "image_size": 224,
+      "segmentation": false,
+      "best_acc": 0.8744548286604361,
+      "best_macro_f1": 0.7768687069265706
+    }
+  ],
+  "data_dir": "data/cassava_data",
+  "batch_size": 32,
+  "num_workers": 4
+}

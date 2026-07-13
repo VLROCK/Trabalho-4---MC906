@@ -1,0 +1,21 @@
+{
+  "checkpoint": "pesos/experimentos/efficientnet_b3_cutmix_label_smoothing_img300_segmentation/best_model.pth",
+  "data_dir": "data/cassava_data",
+  "split": "val",
+  "split_csv": null,
+  "predictions_csv": "pesos/experimentos/ensemble_direct_plus_cropnet_w040_060/ensemble_val_predictions.csv",
+  "out_dir": "interpretability_outputs/occlusion_effb3_wrong_high_conf",
+  "group": "wrong_high_conf",
+  "num_images": 8,
+  "target_class": "pred",
+  "patch_size": 48,
+  "stride": 24,
+  "mask_value": 0.0,
+  "batch_size": 64,
+  "model": null,
+  "image_size": null,
+  "segmentation": "auto",
+  "device": "auto",
+  "seed": 42,
+  "dpi": 160
+}

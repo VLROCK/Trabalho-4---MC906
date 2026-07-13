@@ -1,0 +1,7 @@
+{
+  "accuracy": 0.8931464174454828,
+  "balanced_accuracy": 0.8242501022953377,
+  "macro_f1": 0.8185258102124596,
+  "mean_unknown_prob": 0.008611953817307949,
+  "median_unknown_prob": 8.131784852594137e-06
+}

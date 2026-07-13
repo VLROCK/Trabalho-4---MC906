@@ -1,0 +1,2 @@
+image_id,pred_label,cropnet_unknown_prob,prob_0,prob_1,prob_2,prob_3,prob_4
+2216849948.jpg,4,2.0664951e-05,0.006671556,0.008174156,0.39069727,0.011445529,0.58301145

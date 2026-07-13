@@ -1,0 +1,28 @@
+{
+  "checkpoint": "pesos/experimentos/efficientnet_b3_cutmix_label_smoothing_img300_segmentation/best_model.pth",
+  "data_dir": "data/cassava_data",
+  "split": "val",
+  "split_csv": null,
+  "predictions_csv": "pesos/experimentos/ensemble_direct_plus_cropnet_w040_060/ensemble_val_predictions.csv",
+  "out_dir": "interpretability_outputs/gradcam_effb3_seg_best_ensemble_samples",
+  "groups": [
+    "correct_high_conf",
+    "wrong_high_conf",
+    "uncertain",
+    "low_true_prob",
+    "per_class"
+  ],
+  "num_per_group": 6,
+  "max_images": null,
+  "model": null,
+  "image_size": 300,
+  "segmentation": true,
+  "target_layer": "auto",
+  "target_class": "pred",
+  "device": "cpu",
+  "alpha": 0.45,
+  "dpi": 160,
+  "seed": 42,
+  "model_name": "efficientnet_b3",
+  "target_layer_resolved": "features[-1]"
+}
