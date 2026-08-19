@@ -1,0 +1,12 @@
+{
+  "prediction_csvs": [
+    "pesos/experimentos/ensemble_top3_val/ensemble_val_predictions.csv",
+    "pesos/experimentos/cropnet_val_center_crop/cropnet_val_predictions.csv"
+  ],
+  "weights": [
+    0.85,
+    0.15
+  ],
+  "split": "val",
+  "normalize_input_probs": false
+}

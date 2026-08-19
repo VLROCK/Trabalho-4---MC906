@@ -2,3 +2,4 @@
 .vscode
 *.zip
 data/cassava_data/
+*.pth

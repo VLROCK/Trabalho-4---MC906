@@ -1,0 +1,20 @@
+{
+  "predictions_csv": "pesos/experimentos/ensemble_direct_plus_cropnet_w040_060/ensemble_val_predictions.csv",
+  "num_examples_input": 3210,
+  "num_examples_after_filters": 3210,
+  "prob_cols": [
+    "prob_0",
+    "prob_1",
+    "prob_2",
+    "prob_3",
+    "prob_4"
+  ],
+  "top_k": 300,
+  "method": "both",
+  "only_misclassified": false,
+  "max_self_confidence": null,
+  "simple_output": "pesos/experimentos/ensemble_direct_plus_cropnet_w040_060/confident_learning/label_issues_simple.csv",
+  "simple_top_k": 300,
+  "cleanlab_output": "pesos/experimentos/ensemble_direct_plus_cropnet_w040_060/confident_learning/label_issues_cleanlab.csv",
+  "cleanlab_top_k": 121
+}

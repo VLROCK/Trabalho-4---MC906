@@ -1,0 +1,7 @@
+{
+  "correct_high_conf": 16,
+  "wrong_high_conf": 16,
+  "uncertain_high_entropy": 16,
+  "low_true_label_probability": 16,
+  "random_per_class": 15
+}

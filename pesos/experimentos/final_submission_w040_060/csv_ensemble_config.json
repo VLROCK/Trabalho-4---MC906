@@ -1,0 +1,12 @@
+{
+  "prediction_csvs": [
+    "pesos/experimentos/ensemble_top3_test/ensemble_test_probabilities.csv",
+    "pesos/experimentos/cropnet_test_crop_tta/cropnet_test_predictions.csv"
+  ],
+  "weights": [
+    0.4,
+    0.6
+  ],
+  "split": "test",
+  "normalize_input_probs": false
+}

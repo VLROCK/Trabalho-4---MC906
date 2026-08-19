@@ -1,0 +1,23 @@
+{
+  "handle": "https://tfhub.dev/google/cropnet/classifier/cassava_disease_V1/2",
+  "split": "test",
+  "center_crop": true,
+  "crop_tta": true,
+  "renormalize_5class": true,
+  "batch_size": 64,
+  "classes_6": [
+    "cbb",
+    "cbsd",
+    "cgm",
+    "cmd",
+    "healthy",
+    "unknown"
+  ],
+  "kaggle_mapping": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4
+  }
+}

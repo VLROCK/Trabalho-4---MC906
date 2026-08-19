@@ -1,0 +1,14 @@
+{
+  "checkpoint": "pesos/experimentos/resnet50_cutmix_label_smoothing_reg/best_model.pth",
+  "data_dir": "data/cassava_data",
+  "split": "val",
+  "out_dir": "pesos/experimentos/resnet50_label_smoothing/eval_val_tta",
+  "batch_size": 64,
+  "num_workers": 2,
+  "tta": true,
+  "model": null,
+  "image_size": null,
+  "segmentation": false,
+  "val_size": null,
+  "seed": null
+}
